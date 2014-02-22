@@ -1,12 +1,21 @@
 class Dot {
+int radius = 1000;
+float s = 0;
+float t = 0;
 boolean debug = false;
 Dot previous;
 Dot next;
 float wpos, hpos, dpos;
-Dot() {
-  wpos = random(-1000, 1000);
-  hpos = random(-1000, 1000);
-  dpos = random(-1000, 1000);
+float size;
+Dot(Dot p) {
+  previous = p;
+  /*
+  wpos = random(-2000, 2000);
+  hpos = random(-2000, 2000);
+  dpos = random(-2000, 2000);
+  */
+  setPoint();
+  size = random(40);
   if (debug) println("w: " + wpos + ", h: " + hpos + ", d: " + dpos);
 }
 void update() {
@@ -15,41 +24,39 @@ void update() {
   translate(wpos, hpos, dpos);
   smooth(8);
   sphereDetail(20);
-  sphere(15);
+  sphere(size);
   popMatrix();
+}
+void setPoint() {
+  if (previous != null) {
+    if (debug) println("ny");
+    s = previous.s;
+    t = previous.t;
+  }
+  if (previous == null) {
+    s = 0;
+    t = 0;
+  }
+     s = random(250);  
+     t = random(250);   
+     float radianS = radians(s);
+     float radianT = radians(t);
+     
+     float thisx = 0 + (radius * cos(radianS) * sin(radianT));
+     float thisy = 0 + (radius * sin(radianS) * sin(radianT));
+     float thisz = 0 + (radius * cos(radianT));
+     
+     wpos += thisx; 
+     hpos += thisy; 
+     dpos += thisz;
 }
 void drawLine() {
   pushMatrix();
   translate(width/2, height/2, 30);
   strokeWeight(0.4);
   smooth(8);
-  
-  // mulig rect er penere enn line. sjekk:
-  // http://forum.processing.org/one/topic/why-does-rect-look-better-than-line.html
-  // rect, rectMode
-  // no sånt, med noStroke:
-  // rect(0, 0, dist(x0, y0, x1, y1), 1);
   if (previous != null)
     line(previous.wpos, previous.hpos, previous.dpos, wpos, hpos, dpos);
   popMatrix();
 }
-// Denne funker bare i 2d, kan dette gjøres med box? (w, h, d)
-/*
-void sline(float x0, float y0, float x1, float y1) {
-  noStroke();
-  pushMatrix();
-  translate(x0+0.5, y0+0.5);
-  rotate(atan2(y1-y0, x1-x0));
-  rect(-0.5, -0.5, dist(x0, y0, x1, y1)+1, 1);
-  popMatrix();
-  // for å få til det samme med box må en regne ut hvor mange grader
-  //                                    og translate for å stå i det ene punktet.
-  //                                    ^^
-  // x, y, z er ut fra 0, 0, 0 og bruke rotateX/Y/Z med dette og så tegne
-  // en box fra translate til første punkt med w = lengden mellom disse
-  // og h = 1, d = 1 - noStroke();
-  // pakkes inn i en metode sline(x1, y1, z1, x2, y2, z2)
-  // kanskje atan2() kan brukes til å renge ut vinkelen til denne? (problem hvis den tar utgangspunkt i x=0 på x-aksen?
-}
-*/
 }

@@ -8,9 +8,9 @@ void setup() {
   cameraP3Dsetup() ;
   
   
-  //size(1280, 480, OPENGL);
-  //size(720, 720, P3D);
-  size(1440, 900, OPENGL);
+  //size(1440, 1440, OPENGL);
+  size(1440, 900, P3D);
+  //size(2560, 1440, OPENGL);
   noCursor();
   
   
@@ -21,17 +21,17 @@ void setup() {
   fill(43, 63, 79);
   popMatrix();
   //translate(width/2, height/2, 30);
-  firstDot = new Dot();
-  secondDot = new Dot();
+  firstDot = new Dot(null);
+  secondDot = new Dot(null);
   currentDot = firstDot;
-  for (int i = 0; i < 8; i++) {
-    currentDot.next = new Dot();
+  for (int i = 0; i < 25; i++) {
+    currentDot.next = new Dot(currentDot);
     currentDot.next.previous = currentDot;
     currentDot = currentDot.next;
   }
   currentDot = secondDot;
-  for (int i = 0; i < 20; i++) {
-    currentDot.next = new Dot();
+  for (int i = 0; i < 10; i++) {
+    currentDot.next = new Dot(currentDot);
     currentDot.next.previous = currentDot;
     currentDot = currentDot.next;
   }
@@ -40,6 +40,10 @@ void setup() {
 
 void draw() {
   background(255);
+  
+  translate(width/2, height/2, 0);  
+  rotateY(frameCount * 0.003);
+  rotateX(frameCount * 0.004);
   //camera(mouseX, 30.0, (height/2) / tan(PI/6),// 220.0 // eyeX, eyeY, eyeZ
   //       width / 2, height / 2, mouseY, // centerX, centerY, centerZ
   //       0.0, 1.0, 0.0); // upX, upY, upZ
@@ -50,7 +54,7 @@ void draw() {
   //camera(mouseX * 2 - width / 2, height / 2 - mouseY, (height/2) / tan(PI/6), width/2, height/2, 0, 0, 1, 0);
   if (debug) println(mouseX + " : " + (mouseY - (height / 2)));
   currentDot = firstDot;
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < 25; i++) {
     currentDot.update();
     currentDot.drawLine();
     currentDot = currentDot.next;
@@ -59,7 +63,7 @@ void draw() {
   currentDot.drawLine();
   
   currentDot = secondDot;
-  for (int i = 0; i < 20; i++) {
+  for (int i = 0; i < 10; i++) {
     currentDot.update();
     currentDot.drawLine();
     currentDot = currentDot.next;
@@ -85,8 +89,7 @@ void draw() {
   PVector scene = new PVector (0,0,0) ;
   // the direction of the cam is between (-1 to 1 )
   PVector dirCam = new PVector (0.0, 1.0, 0.0) ;
-  cameraP3Ddraw(posEye, scene, dirCam) ;
-  println(frameRate);
+  cameraP3Ddraw(posEye, scene, dirCam);
 }
 
 
