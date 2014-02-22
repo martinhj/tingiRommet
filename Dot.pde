@@ -50,6 +50,9 @@ void setPoint() {
      hpos += thisy; 
      dpos += thisz;
 }
+void movePoint() {
+  
+}
 void drawLine() {
   pushMatrix();
   translate(width/2, height/2, 30);
