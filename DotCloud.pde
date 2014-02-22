@@ -1,7 +1,9 @@
 class DotCloud {
   Dot firstDot;
   int l;
+  boolean debug = false;
   DotCloud(int dotNum) {
+    if (debug) println(dotNum);
     l = dotNum;
     firstDot = new Dot(null);
     currentDot = firstDot;

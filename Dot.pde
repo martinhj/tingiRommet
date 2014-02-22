@@ -28,7 +28,7 @@ void update() {
   pushMatrix();
   translate(width/2, height/2, 0);
   translate(wpos, hpos, dpos);
-  sphereDetail(50);
+  sphereDetail(1);
   sphere(size);
   popMatrix();
 }
@@ -39,11 +39,11 @@ void setPoint() {
     t = previous.t;
   }
   if (previous == null) {
-    s = 0;
-    t = 0;
+    s = random(360);
+    t = random(360);
   }
-     s = random(250);  
-     t = random(250);   
+     s += 1;//random(250);  
+     t += 18; //random(250);   
      float radianS = radians(s);
      float radianT = radians(t);
      
