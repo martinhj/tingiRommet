@@ -1,6 +1,8 @@
 class DotCloud {
   Dot firstDot;
+  int l;
   DotCloud(int dotNum) {
+    l = dotNum;
     firstDot = new Dot(null);
     currentDot = firstDot;
     for (int i = 0; i < dotNum; i++) {
@@ -10,7 +12,7 @@ class DotCloud {
   }
   void update(){
     currentDot = firstDot;
-    for (int i = 0; i < 25; i++) {
+    for (int i = 0; i < l; i++) {
       currentDot.update();
       currentDot.drawLine();
       currentDot = currentDot.next;

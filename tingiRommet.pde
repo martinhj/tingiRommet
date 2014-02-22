@@ -1,10 +1,10 @@
 Dot firstDot;
 Dot secondDot;
 Dot currentDot;
-DotCloud oneCloud;
+DotCloud firstCloud, secondCloud;
 float zoomF = 0.3f;
 boolean debug = false;
-int antiAlias = 8;
+int antiAlias = 5;
 int antia = antiAlias;
 
 void setup() {
@@ -15,8 +15,8 @@ void setup() {
   
   
   //size(1440, 1440, OPENGL);
-  //size(1440, 900, OPENGL);
-  size(2560, 1440, OPENGL);
+  size(1440, 900, OPENGL);
+  //size(2560, 1440, OPENGL);
   noCursor();
   background(255);
   stroke(43, 63, 79);
@@ -24,26 +24,20 @@ void setup() {
   //translate(width/2, height/2, -50);
   fill(43, 63, 79);
   popMatrix();
-  //translate(width/2, height/2, 30);
-  secondDot = new Dot(null);
-  oneCloud = new DotCloud(25);
-  currentDot = secondDot;
-  for (int i = 0; i < 10; i++) {
-    currentDot.next = new Dot(currentDot);
-    currentDot.next.previous = currentDot;
-    currentDot = currentDot.next;
-  }
-
+  firstCloud = new DotCloud(25);
+  secondCloud = new DotCloud(4);
 }
 
 void draw() {
   background(255);
-  
+ 
   translate(width/2, height/2, 0);  
   rotateY(frameCount * 0.003);
   //rotateX(frameCount * 0.003);
   rotateZ(frameCount * 0.003);
   scale(zoomF);
+  firstCloud.update();
+  secondCloud.update();
   
   //camera(mouseX, 30.0, (height/2) / tan(PI/6),// 220.0 // eyeX, eyeY, eyeZ
   //       width / 2, height / 2, mouseY, // centerX, centerY, centerZ
@@ -55,17 +49,6 @@ void draw() {
   //camera(mouseX * 2 - width / 2, height / 2 - mouseY, (height/2) / tan(PI/6), width/2, height/2, 0, 0, 1, 0);
   if (debug) println(mouseX + " : " + (mouseY - (height / 2)));
   
-  
-  oneCloud.update();
-  
-  currentDot = secondDot;
-  for (int i = 0; i < 10; i++) {
-    currentDot.update();
-    currentDot.drawLine();
-    currentDot = currentDot.next;
-  }
-  currentDot.update();
-  currentDot.drawLine();
   
   
   /* Methods moved to the camera Class, this stuff needs a update.

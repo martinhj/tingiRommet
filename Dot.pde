@@ -1,5 +1,5 @@
 class Dot {
-int sphereRadius = 1000;
+int sphereRadius = 1800;
 float lineThickness = 1.0;
 
 float lineT = lineThickness;
