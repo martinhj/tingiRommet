@@ -5,7 +5,6 @@ class DotCloud {
     currentDot = firstDot;
     for (int i = 0; i < dotNum; i++) {
       currentDot.next = new Dot(currentDot);
-      currentDot.next.previous = currentDot;
       currentDot = currentDot.next;
     }
   }
@@ -15,7 +14,7 @@ class DotCloud {
       currentDot.update();
       currentDot.drawLine();
       currentDot = currentDot.next;
-    }
+  }
     currentDot.update();
     currentDot.drawLine();
   }

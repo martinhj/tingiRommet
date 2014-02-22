@@ -1,6 +1,6 @@
 class Dot {
 int sphereRadius = 1000;
-float lineThickness = 1.5;
+float lineThickness = 1.0;
 
 float lineT = lineThickness;
 int radius = sphereRadius;
@@ -28,7 +28,7 @@ void update() {
   pushMatrix();
   translate(width/2, height/2, 0);
   translate(wpos, hpos, dpos);
-  sphereDetail(5);
+  sphereDetail(50);
   sphere(size);
   popMatrix();
 }

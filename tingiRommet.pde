@@ -15,8 +15,8 @@ void setup() {
   
   
   //size(1440, 1440, OPENGL);
-  size(1440, 900, OPENGL);
-  //size(2560, 1440, OPENGL);
+  //size(1440, 900, OPENGL);
+  size(2560, 1440, OPENGL);
   noCursor();
   background(255);
   stroke(43, 63, 79);
@@ -25,7 +25,6 @@ void setup() {
   fill(43, 63, 79);
   popMatrix();
   //translate(width/2, height/2, 30);
-  firstDot = new Dot(null);
   secondDot = new Dot(null);
   oneCloud = new DotCloud(25);
   currentDot = secondDot;
@@ -55,6 +54,8 @@ void draw() {
   //camera(width/2 + mouseX+mouseY, height / 2 + mouseY+mouseX, (height/2) / tan(PI/6), mouseX, height/2, 0, 0, 1, 0);
   //camera(mouseX * 2 - width / 2, height / 2 - mouseY, (height/2) / tan(PI/6), width/2, height/2, 0, 0, 1, 0);
   if (debug) println(mouseX + " : " + (mouseY - (height / 2)));
+  
+  
   oneCloud.update();
   
   currentDot = secondDot;
