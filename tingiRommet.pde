@@ -1,16 +1,21 @@
 Dot firstDot;
 Dot secondDot;
 Dot currentDot;
+DotCloud oneCloud;
 float zoomF = 0.3f;
 boolean debug = false;
+int antiAlias = 8;
+int antia = antiAlias;
 
 void setup() {
+  smooth(antia);
   frameRate(120);
-  cameraP3Dsetup() ;
+  // Camera code moved to the Camera class.
+  //cameraP3Dsetup() ;
   
   
   //size(1440, 1440, OPENGL);
-  size(1440, 900, P3D);
+  size(1440, 900, OPENGL);
   //size(2560, 1440, OPENGL);
   noCursor();
   background(255);
@@ -22,12 +27,7 @@ void setup() {
   //translate(width/2, height/2, 30);
   firstDot = new Dot(null);
   secondDot = new Dot(null);
-  currentDot = firstDot;
-  for (int i = 0; i < 25; i++) {
-    currentDot.next = new Dot(currentDot);
-    currentDot.next.previous = currentDot;
-    currentDot = currentDot.next;
-  }
+  oneCloud = new DotCloud(25);
   currentDot = secondDot;
   for (int i = 0; i < 10; i++) {
     currentDot.next = new Dot(currentDot);
@@ -42,8 +42,8 @@ void draw() {
   
   translate(width/2, height/2, 0);  
   rotateY(frameCount * 0.003);
-  rotateX(frameCount * 0.003);
-  rotateY(frameCount * 0.003);
+  //rotateX(frameCount * 0.003);
+  rotateZ(frameCount * 0.003);
   scale(zoomF);
   
   //camera(mouseX, 30.0, (height/2) / tan(PI/6),// 220.0 // eyeX, eyeY, eyeZ
@@ -55,14 +55,7 @@ void draw() {
   //camera(width/2 + mouseX+mouseY, height / 2 + mouseY+mouseX, (height/2) / tan(PI/6), mouseX, height/2, 0, 0, 1, 0);
   //camera(mouseX * 2 - width / 2, height / 2 - mouseY, (height/2) / tan(PI/6), width/2, height/2, 0, 0, 1, 0);
   if (debug) println(mouseX + " : " + (mouseY - (height / 2)));
-  currentDot = firstDot;
-  for (int i = 0; i < 25; i++) {
-    currentDot.update();
-    currentDot.drawLine();
-    currentDot = currentDot.next;
-  }
-  currentDot.update();
-  currentDot.drawLine();
+  oneCloud.update();
   
   currentDot = secondDot;
   for (int i = 0; i < 10; i++) {

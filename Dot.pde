@@ -1,5 +1,11 @@
 class Dot {
-int radius = 1000;
+int sphereRadius = 1000;
+float lineThickness = 1.5;
+
+float lineT = lineThickness;
+int radius = sphereRadius;
+
+
 float s = 0;
 float t = 0;
 boolean debug = false;
@@ -20,10 +26,9 @@ Dot(Dot p) {
 }
 void update() {
   pushMatrix();
-  translate(width/2, height/2, 30);
+  translate(width/2, height/2, 0);
   translate(wpos, hpos, dpos);
-  smooth(8);
-  sphereDetail(20);
+  sphereDetail(5);
   sphere(size);
   popMatrix();
 }
@@ -55,9 +60,8 @@ void movePoint() {
 }
 void drawLine() {
   pushMatrix();
-  translate(width/2, height/2, 30);
-  strokeWeight(0.4);
-  smooth(8);
+  translate(width/2, height/2, 0);
+  strokeWeight(lineT);
   if (previous != null)
     line(previous.wpos, previous.hpos, previous.dpos, wpos, hpos, dpos);
   popMatrix();
