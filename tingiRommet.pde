@@ -43,7 +43,9 @@ void draw() {
   
   translate(width/2, height/2, 0);  
   rotateY(frameCount * 0.003);
-  rotateX(frameCount * 0.004);
+  rotateX(frameCount * 0.003);
+  rotateY(frameCount * 0.003);
+  
   //camera(mouseX, 30.0, (height/2) / tan(PI/6),// 220.0 // eyeX, eyeY, eyeZ
   //       width / 2, height / 2, mouseY, // centerX, centerY, centerZ
   //       0.0, 1.0, 0.0); // upX, upY, upZ
@@ -204,6 +206,19 @@ void cameraP3Ddraw(PVector eye, PVector posScene, PVector dir ) {
   camera(eye.x,                      eye.y,                     eye.z, 
          centerScene.x +posScene.x , centerScene.y +posScene.y, centerScene.z +posScene.z, 
          dir.x,                      dir.y,                     dir.z);
+}
+
+void keyPressed() {
+  switch(keyCode)
+  {
+    case UP:
+      zoomF += 0.02f;
+      break;
+    case DOWN:
+      zoomF -= 0.02f;
+      if (zoomF < 0.01) zoomF = 0.01;
+      break;
+  }
 }
  
 
