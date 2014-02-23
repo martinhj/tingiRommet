@@ -12,15 +12,14 @@ int antiAlias = 5;
 int antia = antiAlias;
 
 void setup() {
-  size(1440, 900, OPENGL);
-  //size(640, 480, P3D);
+  //size(1440, 900, OPENGL);
+  size(640, 480, P3D);
   //size(2560, 1440, OPENGL);
-  cam = new PeasyCam(this, 100);
+  cam = new PeasyCam(this, 600);
   cam.setMinimumDistance(50);
   cam.setMaximumDistance(500);
   smooth(antia);
   frameRate(120);
-  
   noCursor();
   background(255);
   stroke(43, 63, 79);
@@ -40,6 +39,7 @@ void draw() {
   rotateZ(frameCount * 0.003);
   scale(zoomF);
   for (DotCloud d: clouds) d.update();
+}
 
 void keyPressed() {
   switch(keyCode)
