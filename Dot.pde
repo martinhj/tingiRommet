@@ -1,4 +1,5 @@
 class Dot {
+float x, y, z;
 int sphereRadius = 1800;
 float lineThickness = 1.0;
 
@@ -8,6 +9,10 @@ int radius = sphereRadius;
 
 float s = 0;
 float t = 0;
+float tx = random(10000);
+float ty = random(10000);
+float tz = random(10000);
+float wspos, hspos, dspos;
 boolean debug = false;
 Dot previous;
 Dot next;
@@ -16,21 +21,31 @@ float size;
 Dot(Dot p) {
   previous = p;
   /*
-  wpos = random(-2000, 2000);
-  hpos = random(-2000, 2000);
-  dpos = random(-2000, 2000);
+  wspos = random(-2000, 2000);
+  hspos = random(-2000, 2000);
+  dspos = random(-2000, 2000);
   */
   setPoint();
-  size = random(40);
+  size = random(20);
   if (debug) println("w: " + wpos + ", h: " + hpos + ", d: " + dpos);
 }
 void update() {
+  updatePoint();
   pushMatrix();
   translate(width/2, height/2, 0);
   translate(wpos, hpos, dpos);
-  sphereDetail(1);
-  sphere(size);
+  //sphereDetail(1);
+  x = modelX(0, 0, 0);
+  y = modelY(0, 0, 0);
+  z = modelZ(0, 0, 0);
+
+  //sphere(size);
   popMatrix();
+  
+  
+ 
+ 
+  
 }
 void setPoint() {
   if (previous != null) {
@@ -42,8 +57,8 @@ void setPoint() {
     s = random(360);
     t = random(360);
   }
-     s += 1;//random(250);  
-     t += 18; //random(250);   
+     s += 1;  
+     t += 18; 
      float radianS = radians(s);
      float radianT = radians(t);
      
@@ -51,11 +66,38 @@ void setPoint() {
      float thisy = 0 + (radius * sin(radianS) * sin(radianT));
      float thisz = 0 + (radius * cos(radianT));
      
-     wpos += thisx; 
-     hpos += thisy; 
-     dpos += thisz;
+     wspos += thisx; 
+     hspos += thisy; 
+     dspos += thisz;
 }
-void movePoint() {
+void updatePoint() {
+     s += 1;  
+     t += 18; 
+     
+     float radianS = radians(s);
+     float radianT = radians(t);
+     
+     float thisx = 0 + (radius * cos(radianS) * sin(radianT));
+     float thisy = 0 + (radius * sin(radianS) * sin(radianT));
+     float thisz = 0 + (radius * cos(radianT));
+     
+     /*wpos += thisx/1000; 
+     hpos += thisy/1000; 
+     dpos += thisz/1000;*/
+     
+     wpos = map(noise(tx), 0, 1, 0, 500) + wspos;
+     hpos = map(noise(ty), 0, 1, 0, 500) + hspos;
+     dpos = map(noise(tz), 0, 1, 0, 500) + dspos;
+     tx += 0.01;
+     ty += 0.01;
+     tz += 0.01;
+}
+void drawPoint() {
+  pushMatrix();
+  translate(x,y,z);
+  ellipse(0,0,size,size);
+  //box(20);
+  popMatrix();
   
 }
 void drawLine() {

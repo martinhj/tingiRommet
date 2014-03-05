@@ -22,4 +22,11 @@ class DotCloud {
     currentDot.update();
     currentDot.drawLine();
   }
+  void drawPoint() {
+    currentDot = firstDot;
+    for (int i = 0; i < l; i++) {
+      currentDot.drawPoint();
+      currentDot = currentDot.next;
+    }
+  }
 }
