@@ -3,7 +3,7 @@ PeasyCam cam;
 PFont font;
 
 int numberOfClouds = 3;
-int numberOfMaxDotsPerCloud = 300;
+int numberOfMaxDotsPerCloud = 50;
 int numC = numberOfClouds;
 int maxD = numberOfMaxDotsPerCloud;
 
@@ -22,12 +22,12 @@ int antia = antiAlias;
 
 
 void setup() {
-  size(1440, 900, OPENGL);
+  //size(1440, 900, OPENGL);
   textSize(8);
   //font = loadFont("Consolas-10.vlw");
   //textFont(font);
   //size(640, 480, P3D);
-  //size(2560, 1440, OPENGL);
+  size(2560, 1440, OPENGL);
   cam = new PeasyCam(this, 600);
   cam.setMinimumDistance(50);
   cam.setMaximumDistance(5000);
@@ -40,7 +40,7 @@ void setup() {
   stroke(43, 63, 79);
   fill(43, 63, 79);
   /*popMatrix();*/
-  for (int i = 0; i < clouds.length; i++) clouds[i] = new DotCloud((int)random(maxD));
+  for (int i = 0; i < clouds.length; i++) clouds[i] = new DotCloud((int)random(maxD - maxD/2, maxD));
 }
 
 
@@ -63,7 +63,7 @@ void draw() {
 
   //translate(width/2, height/2, 0);
   pushMatrix();
-  scale(zoomF);
+  //scale(zoomF);
   rotateY(frameCount * 0.003);
   rotateX(frameCount * 0.003);
   rotateZ(frameCount * 0.003);
