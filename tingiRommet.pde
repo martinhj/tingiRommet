@@ -16,6 +16,9 @@ boolean debug = false;
 int antiAlias = 5;
 int antia = antiAlias;
 
+
+
+
 void setup() {
   size(1440, 900, OPENGL);
   //size(640, 480, P3D);
@@ -35,11 +38,14 @@ void setup() {
   for (int i = 0; i < clouds.length; i++) clouds[i] = new DotCloud((int)random(maxD));
 }
 
+
+
+
 void draw() {
   background(255);
- 
+
   //translate(width/2, height/2, 0);
-  pushMatrix();  
+  pushMatrix();
   rotateY(frameCount * 0.003);
   rotateX(frameCount * 0.003);
   rotateZ(frameCount * 0.003);
@@ -47,12 +53,15 @@ void draw() {
   for (DotCloud d: clouds) d.update();
   popMatrix();
   pushMatrix();
-  
+
   for (DotCloud d: clouds) d.drawPoint();
   popMatrix();
   //frame.setTitle("" + frameRate);
   //println(frameRate);
 }
+
+
+
 
 void keyPressed() {
   switch(keyCode)
@@ -66,6 +75,3 @@ void keyPressed() {
       break;
   }
 }
- 
-
-
