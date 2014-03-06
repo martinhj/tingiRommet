@@ -36,7 +36,7 @@ class DotCloud {
 
   void drawPoint() {
     currentDot = firstDot;
-    for (int i = 0; i < l; i++) {
+    while (currentDot != null) {
       currentDot.drawPoint();
       currentDot = currentDot.next;
     }

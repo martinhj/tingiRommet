@@ -1,7 +1,7 @@
 class Dot {
 float x, y, z;
 int sphereRadius = 1800;
-float lineThickness = 1.0;
+float lineThickness = 0.4;
 
 float lineT = lineThickness;
 int radius = sphereRadius;
