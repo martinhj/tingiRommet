@@ -12,7 +12,7 @@ Dot secondDot;
 Dot currentDot;
 
 DotCloud[] clouds = new DotCloud[numC];
-float zoomF = 0.3f;
+float zoomF = 0.2f;
 float time, usedTime;
 boolean debug = false;
 int antiAlias = 5;
@@ -22,12 +22,12 @@ int antia = antiAlias;
 
 
 void setup() {
-  //size(1440, 900, OPENGL);
+  size(1440, 900, OPENGL);
   textSize(8);
   //font = loadFont("Consolas-10.vlw");
   //textFont(font);
   //size(640, 480, P3D);
-  size(2560, 1440, OPENGL);
+  //size(2560, 1440, OPENGL);
   cam = new PeasyCam(this, 600);
   cam.setMinimumDistance(50);
   cam.setMaximumDistance(5000);
@@ -53,7 +53,7 @@ void printFrameRate() {
   stroke(255);
   text(frameRate, -500, -300);
   text(usedTime, -500, -270);
-  stroke(43, 63, 79);
+  stroke(43, 63, 79, 100);
 }
 
 void draw() {
@@ -63,10 +63,12 @@ void draw() {
 
   //translate(width/2, height/2, 0);
   pushMatrix();
-  //scale(zoomF);
+  scale(zoomF);
+  ///*
   rotateY(frameCount * 0.003);
   rotateX(frameCount * 0.003);
   rotateZ(frameCount * 0.003);
+  //*/
   for (DotCloud d: clouds) d.update();
   popMatrix();
 

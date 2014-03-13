@@ -1,7 +1,7 @@
 class Dot {
 float x, y, z;
 int sphereRadius = 1800;
-float lineThickness = 0.4;
+float lineThickness = 2.0;
 
 float lineT = lineThickness;
 int radius = sphereRadius;
@@ -25,12 +25,12 @@ float size;
 Dot(Dot p) {
   previous = p;
   ///*
-  wspos = random(-2000, 2000);
-  hspos = random(-2000, 2000);
-  dspos = random(-2000, 2000);
+  wspos = random(-1500, 1500);
+  hspos = random(-1500, 1500);
+  dspos = random(-1500, 1500);
   //*/
   //setPoint();
-  size = random(20);
+  size = random(40);
   if (debug) println("w: " + wpos + ", h: " + hpos + ", d: " + dpos);
 }
 
@@ -96,12 +96,12 @@ void updatePoint() {
      hpos += thisy/1000;
      dpos += thisz/1000;*/
 
-     wpos = map(noise(tx), 0, 1, 0, 500) + wspos;
-     hpos = map(noise(ty), 0, 1, 0, 500) + hspos;
-     dpos = map(noise(tz), 0, 1, 0, 500) + dspos;
-     tx += 0.01;
-     ty += 0.01;
-     tz += 0.01;
+     wpos = map(noise(tx), 0, 1, -1000, 1000) + wspos;
+     hpos = map(noise(ty), 0, 1, -1000, 1000) + hspos;
+     dpos = map(noise(tz), 0, 1, -1000, 1000) + dspos;
+     tx += 0.003;
+     ty += 0.003;
+     tz += 0.003;
 }
 
 
@@ -121,9 +121,11 @@ void drawPoint() {
 void drawLine() {
   pushMatrix();
   translate(width/2, height/2, 0);
+  stroke(43, 63, 79,100);
   strokeWeight(lineT);
   if (previous != null)
     line(previous.wpos, previous.hpos, previous.dpos, wpos, hpos, dpos);
   popMatrix();
+  stroke(43, 63, 79);
 }
 }
