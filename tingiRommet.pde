@@ -3,7 +3,7 @@ PeasyCam cam;
 PFont font;
 
 int numberOfClouds = 3;
-int numberOfMaxDotsPerCloud = 50;
+int numberOfMaxDotsPerCloud = 40;
 int numC = numberOfClouds;
 int maxD = numberOfMaxDotsPerCloud;
 
@@ -18,11 +18,16 @@ boolean debug = false;
 int antiAlias = 5;
 int antia = antiAlias;
 
+color bg = color(255);
+color fg = color(43, 43, 43);
+
+boolean record = false;
+
 
 
 
 void setup() {
-  size(1440, 900, OPENGL);
+  size(1024, 576, OPENGL);
   textSize(8);
   //font = loadFont("Consolas-10.vlw");
   //textFont(font);
@@ -32,13 +37,13 @@ void setup() {
   cam.setMinimumDistance(50);
   cam.setMaximumDistance(5000);
   smooth(antia);
-  frameRate(60);
+  frameRate(30);
   noCursor();
   /*background(255);*/
   /*pushMatrix();*/
   //translate(width/2, height/2, -50);
-  stroke(43, 63, 79);
-  fill(43, 63, 79);
+  stroke(fg);
+  fill(fg);
   /*popMatrix();*/
   for (int i = 0; i < clouds.length; i++) clouds[i] = new DotCloud((int)random(maxD - maxD/2, maxD));
 }
@@ -47,7 +52,7 @@ void setup() {
 
 void printFrameRate() {
   /*noFill();*/
-  fill(255);
+  fill(bg);
   rect(-500,-320, 200, 200, 5);
   fill(43, 63, 79);
   stroke(255);
@@ -57,7 +62,7 @@ void printFrameRate() {
 }
 
 void draw() {
-  background(255);
+  background(bg);
   /*printFrameRate();*/
 
 
@@ -65,9 +70,9 @@ void draw() {
   pushMatrix();
   scale(zoomF);
   ///*
-  rotateY(frameCount * 0.003);
-  rotateX(frameCount * 0.003);
-  rotateZ(frameCount * 0.003);
+  rotateY(frameCount * 0.006);
+  //rotateX(frameCount * 0.003);
+  //rotateZ(frameCount * 0.003);
   //*/
   for (DotCloud d: clouds) d.update();
   popMatrix();
@@ -80,6 +85,10 @@ void draw() {
   /*usedTime = millis() - time;*/
   //frame.setTitle("" + frameRate);
   //println(frameRate);
+
+
+
+  if (record) saveFrame();
 }
 
 
@@ -96,4 +105,12 @@ void keyPressed() {
       if (zoomF < 0.01) zoomF = 0.01;
       break;
   }
+  switch(key)
+  {
+    case 'r':
+      if (record) record = false;
+      else record = true;
+      break;
+  }
+
 }

@@ -30,7 +30,7 @@ Dot(Dot p) {
   dspos = random(-1500, 1500);
   //*/
   //setPoint();
-  size = random(40);
+  size = random(20);
   if (debug) println("w: " + wpos + ", h: " + hpos + ", d: " + dpos);
 }
 
@@ -121,11 +121,11 @@ void drawPoint() {
 void drawLine() {
   pushMatrix();
   translate(width/2, height/2, 0);
-  stroke(43, 63, 79,100);
+  //stroke(43, 63, 79,100);
   strokeWeight(lineT);
   if (previous != null)
     line(previous.wpos, previous.hpos, previous.dpos, wpos, hpos, dpos);
   popMatrix();
-  stroke(43, 63, 79);
+  //stroke(43, 63, 79);
 }
 }
